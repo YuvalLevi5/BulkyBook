@@ -28,10 +28,13 @@ namespace BulkyBook.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Category obj)
         {
-            Console.WriteLine(obj);
+            if (ModelState.IsValid)
+            {
             _db.Categories.Add(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");
+            }
+            return View(obj);
         }
     }
 }
